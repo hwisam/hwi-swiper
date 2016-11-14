@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>HWI-SWIPER</title>
+	<link rel="stylesheet" href="../css/hwiswiper.css">
+	<style>
+	body{height:1000px;}
+	.sm-wrap {width:100%;height:300px;border:1px solid gray;}
+	.sm-slide img {width:100%;height:100%}
+	</style>
+	<script src="../js/hwiswiper.js" ></script>
+</head>
+<body>
+<div id="a">
+	<div class="sm-wrap">
+		<div class="sm-slide" >11
+			<img src="http://cdn.boribori.co.kr/Images_Product/DefaultZoom/MVE/P020348386.jpg?RS=320x0" alt="" />
+		</div>
+		<div class="sm-slide" >22
+			<img src="http://cdn.boribori.co.kr//Images_Product/DefaultLarge/FVR/P035306659.jpg?RS=320x0" alt="" />
+		</div>
+		<div class="sm-slide" >33
+			<img src="http://cdn.boribori.co.kr//Images_Product/DefaultLarge/FVR/P035263567.jpg?RS=320x0" alt="" />
+		</div>
+		<div class="sm-slide" >44
+			<img src="http://cdn.boribori.co.kr//Images_Product/DefaultLarge/U66/P035296846.jpg?RS=320x0" alt="" />
+		</div>
+		<div class="sm-slide" >55
+			<img src="http://cdn.boribori.co.kr//Images_Product/DefaultLarge/FW1/P035117201.jpg?RS=320x0" alt="" />
+		</div>
+	</div>
+<script>
+	var
+		t = new hwiSwiper(document.getElementById("a"),{transitionDuration:'500ms'});
+
+
+//	t.on("touchstart",function(e) {
+//		//console.time("a");
+//		return true;
+//	});
+//	t.on("touchmove",function(e) {
+//		//console.log(e.type);
+//		return true;
+//	});
+//	t.on("touchend",function(e) {
+//		console.log(this.pos.momento.x);
+//		if (this.pos.momento.x > 10)
+//		{
+//			return true;
+//		} else {
+//			return false;
+//		}
+//		return true;
+//	});
+</script>
+</body>
+</html>
