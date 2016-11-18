@@ -18,22 +18,15 @@
   - HTML LAYOUT
 ```html
     <div id="example">
-
       <div class="hwi-wrap">
-
-        <div class="hwi-slide" >
-
-
-        </div>
-
         <div class="hwi-slide" >
 
         </div>
+        <div class="hwi-slide" >
 
+        </div>
 	......
-
       </div>
-
     </div>
 ```
 
@@ -54,7 +47,7 @@
       InitEventList : ["touchstart","touchmove","touchend"]  // 이벤트 
     };
     var hwi = new hwiSwiper(노드,옵션);
-```html
+```
 
 
 
