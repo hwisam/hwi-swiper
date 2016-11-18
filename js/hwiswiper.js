@@ -241,7 +241,6 @@
 				}
 				this.aNode = (this.pNode-1 < 0) ? this.node.length-1: this.pNode-1 ;
 				this.nNode = (this.pNode+1 >= this.node.length) ? 0: this.pNode+1 ;
-				//console.log(this.aNode+" : "+this.pNode+" : "+this.nNode)
 				for(_len;_len<this.node.length;_len++) {
 					this.node[_len].className = this.node[_len].className.replace(" active","");
 				}
@@ -252,22 +251,16 @@
 
 			// 초기 마크업 셋팅
 			this.__proto__.setSlideNode = function() {
-
 				this.SlideNode.node = this.wrap.children;
-				
-				//this.SlideNode.setPresentPos();
 			};
 
 			this.__proto__.init = function () {
-//				var
-//					evt = createCustomEvent("touchend",{touches : [{pageX : 0,pageY : 0}]});
 				this._buildInitHtml();
 				this._attachEvent();
 				this.goPage(0);
-				//this.el.dispatchEvent(evt);
 			};
 
-			// 이벤트 언바인드
+			// 기본이벤트 처리 스택함수(push)
 			this.__proto__.on = function(eventType,callBack) {
 
 				var
@@ -308,6 +301,7 @@
 					}
 				}
 			};
+			//기본이벤트 처리 스택함수(pop)
 			this.__proto__.off = function(eventType) {
 				var
 					_fnStr = "on"+eventType,
