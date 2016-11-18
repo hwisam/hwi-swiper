@@ -15,7 +15,7 @@
 # Swiper Layer
 
   - HTML LAYOUT
-
+```html
     <div id="example">
 
       <div class="hwi-wrap">
@@ -34,35 +34,26 @@
       </div>
 
     </div>
-
+```
 
   - CSS LAYOUT
-
+```html
     .sm-wrap {position:relative;height:100%;overflow:hidden;}
-
     .sm-slide {display:none;position:absolute;overflow:hidden;width:100%;height:100%;transition-timing-function: linear;}
-
     .sm-slide.active {display:block;}
-
+```
 
   - JAVASCRIPT LAYOUT
-
+```html
     옵션 = {
       direction : "horizontal",                              // "horizontal","vertical","both"
-
       transitionDuration : "300ms",                          // 스와프 이동시간
-
       transitionTimingFunction: "linear",                    // 스와프 이동형태
-
       angel: 60,                                             // 스와프 승인 이동각도
-
       InitEventList : ["touchstart","touchmove","touchend"]  // 이벤트 
-
     };
-
-
     var hwi = new hwiSwiper(노드,옵션);
-
+```html
 
 
 
