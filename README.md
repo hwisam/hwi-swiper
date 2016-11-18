@@ -10,6 +10,7 @@
   기본이벤트(InitEventList)의 실행을 제어하는 스택형태 메소드가 있어 리턴값으로 
   이벤트를 간단히 제어 할수 있음.
 
+  DEMO : [http://hwisam.woobi.co.kr/hwiswiper/default.html]
 
 
 # Swiper Layer
