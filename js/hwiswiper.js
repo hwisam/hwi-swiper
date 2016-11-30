@@ -39,7 +39,7 @@
 		return function (container, opt) {
 
 			this.el = container;
-			this.wrap = this.el.getElementsByClassName("sm-wrap")[0];
+			this.wrap = this.el.getElementsByClassName("hwi-wrap")[0];
 			this.elWidth = this.el.clientWidth;
 			this.elHeight = this.el.clientHeight;
 
@@ -48,7 +48,7 @@
 				transitionDuration : "300ms",
 				transitionTimingFunction: "linear",
 				angel: 60,
-				InitEventList : ["touchstart","touchmove","touchend"]
+				InitEventList : ["touchstart","touchmove","touchend","mousedown","mousemove","mouseup"]
 			};
 			this.defOpt = extend(this.defOpt,opt);
 
@@ -70,6 +70,8 @@
 				}
 			};
 
+			this.emitMouse = false;
+
 			this.__proto__.isDirecBoth = function(e) {
 				if (this.defOpt.direction == "both")
 					return true;
@@ -82,17 +84,6 @@
 				if (this.defOpt.direction == "vertical")
 					return true;
 			};
-
-			this.__proto__.ontouchstart = function(e) {
-				this.pos.isMovingContinuity = undefined;
-
-				this.SlideNode.node[this.SlideNode.pNode].style.transitionDuration = "0ms";
-				this.SlideNode.node[this.SlideNode.aNode].style.transitionDuration = "0ms";
-				this.SlideNode.node[this.SlideNode.nNode].style.transitionDuration = "0ms";
-
-				this.pos.startX = e.touches[0].pageX;
-				this.pos.startY = e.touches[0].pageY;
-			}
 
 			this.__proto__.validateTouchMove = function(x,y) {
 				var
@@ -116,8 +107,20 @@
 						this.pos.isMovingContinuity = false;
 					}
 				}
-			}
+			};
 
+
+			/* touch event */
+			this.__proto__.ontouchstart = function(e) {
+				this.pos.isMovingContinuity = undefined;
+
+				this.SlideNode.node[this.SlideNode.pNode].style.transitionDuration = "0ms";
+				this.SlideNode.node[this.SlideNode.aNode].style.transitionDuration = "0ms";
+				this.SlideNode.node[this.SlideNode.nNode].style.transitionDuration = "0ms";
+
+				this.pos.startX = e.touches[0].pageX;
+				this.pos.startY = e.touches[0].pageY;
+			};
 			this.__proto__.ontouchmove = function(e) {
 				var
 					x = (e.touches[0].pageX-this.pos.startX),
@@ -141,14 +144,66 @@
 					this.SlideNode.node[this.SlideNode.aNode].style.transform = 'translate3d(' + (realX-this.elWidth) + 'px, ' + realY + 'px, ' + z + 'px)';
 					this.SlideNode.node[this.SlideNode.nNode].style.transform = 'translate3d(' + (realX+this.elWidth) + 'px, ' + realY + 'px, ' + z + 'px)';
 				}
-			}
+			};
 			this.__proto__.ontouchend = function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 
 				this.SlideNode.setPresentPos(this);
 				this.animate();
+			};
+
+			/* mouse event */
+			this.__proto__.onmousedown = function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				this.emitMouse = true;
+				this.pos.isMovingContinuity = undefined;
+
+				this.SlideNode.node[this.SlideNode.pNode].style.transitionDuration = "0ms";
+				this.SlideNode.node[this.SlideNode.aNode].style.transitionDuration = "0ms";
+				this.SlideNode.node[this.SlideNode.nNode].style.transitionDuration = "0ms";
+
+				this.pos.startX = e.pageX;
+				this.pos.startY = e.pageY;				
 			}
+			this.__proto__.onmousemove = function(e) {
+				if (this.emitMouse) {
+					var
+						x = (e.pageX-this.pos.startX),
+						y = (e.pageY-this.pos.startY),
+						z = 0,
+						realX = this.isDirecHoriz() ? x : 0,
+						realY = this.isDirecvert() ? y : 0,
+						realZ = 0;
+
+					this.pos.momento.x = (this.pos.x > x) ? this.pos.x-x : x-this.pos.x ;
+					this.pos.momento.y = (this.pos.y > y) ? this.pos.y-y : y-this.pos.y ;
+					this.pos.x = x;
+					this.pos.y = y;
+
+					//this.validateTouchMove(x,y);  // this.pos.isMovingContinuity
+					this.pos.isMovingContinuity=true;
+					if (this.pos.isMovingContinuity === true) {
+						e.preventDefault();
+						e.stopPropagation();
+						this.SlideNode.node[this.SlideNode.pNode].style.transform = 'translate3d(' + realX + 'px, ' + realY + 'px, ' + z + 'px)';
+						this.SlideNode.node[this.SlideNode.aNode].style.transform = 'translate3d(' + (realX-this.elWidth) + 'px, ' + realY + 'px, ' + z + 'px)';
+						this.SlideNode.node[this.SlideNode.nNode].style.transform = 'translate3d(' + (realX+this.elWidth) + 'px, ' + realY + 'px, ' + z + 'px)';
+					}
+				}
+			}
+			this.__proto__.onmouseup = function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				this.emitMouse = false;
+
+				this.SlideNode.setPresentPos(this);
+				this.animate();
+			}
+
 
 			
 			// 이벤트 바인드
