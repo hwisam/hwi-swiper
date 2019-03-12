@@ -230,7 +230,7 @@
 					if (that.pos.isMovingContinuity && Math.abs(that.pos.x) >= 50 ) {
 						if (that && that.pos) {
 							if (that.pos.x > 0) {
-								this.pNode = (this.pNode-1 < 0) ? this.node.length-1 : this.pNode-1 ;
+								this.pNode = (this.pNode-1 < 0) ? this.node.length-1 : this.pNode-1 ; 
 							} else {
 								this.pNode = (this.pNode+1 >= this.node.length)? 0 : this.pNode+1 ;
 							}
