@@ -370,4 +370,5 @@
 			this.init();
 		}
 		
+		
 	})(window);
