@@ -369,4 +369,5 @@
 
 			this.init();
 		}
+		
 	})(window);
